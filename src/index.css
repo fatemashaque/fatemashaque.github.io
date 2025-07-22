@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-sans;
+}
+
+html {
+  scroll-behavior: smooth;
+  @apply transition-colors duration-300;
+}
+
+.light {
+  --background: 245, 245, 245;
+  --border: 212, 212, 212;
+  --card: 255, 255, 255;
+  --cta: 139, 92, 246;
+  --cta-active: 124, 58, 237;
+  --cta-text: 255, 255, 255;
+  --hero-bg: url('/bg-light.png');
+  --text: 33, 33, 33; /* near-black */
+  --muted-text: 100, 100, 100;
+  --accent: 139, 92, 246;
+  --work-bg: 179, 212, 245;
+
+  background: rgba(var(--background));
+}
+
+.dark {
+  --background: 0, 0, 0;
+  --border: 38, 38, 38;
+  --card: 23, 23, 23;
+  --cta: 99, 102, 241;
+  --cta-active: 79, 70, 229;
+  --cta-text: 255, 255, 255;
+  --hero-bg: url('/bg-dark.png');
+  --text: 255, 255, 255;
+  --muted-text: 179, 179, 179;
+  --accent: 168, 129, 255;
+  --work-bg: 15, 15, 15;
+
+  background: rgba(var(--background));
+}
