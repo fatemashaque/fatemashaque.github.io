@@ -1,13 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fatema Haque</title>
-    <link rel="icon" type="image/svg+xml" href="/logo.png" />
+    <link rel="icon" type="image/png" href="/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-    <!-- Optional: Set class from localStorage only if explicitly saved -->
     <script>
       const savedTheme = localStorage.getItem("theme");
       if (savedTheme === "dark") {
@@ -15,10 +13,9 @@
         document.documentElement.classList.add("dark");
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-BTLkAszw.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CLMdolG6.css">
   </head>
-  <body>
+  <body class="font-sans">
     <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

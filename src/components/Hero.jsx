@@ -54,7 +54,7 @@ const Hero = () => {
               transition-all duration-300 ease-in-out 
               hover:scale-105"
             >
-              View Resume!
+              View Resume
               <span className="absolute inset-0 rounded-xl bg-purple-700 opacity-0 group-hover:opacity-100 group-hover:animate-pulse pointer-events-none z-[-1] transition-opacity duration-300"></span>
             </a>
           </div>
