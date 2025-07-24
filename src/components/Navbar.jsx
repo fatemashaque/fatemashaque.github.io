@@ -34,30 +34,15 @@ const Navbar = () => {
         border border-[rgba(var(--border),0.3)] shadow-md 
         rounded-full flex items-center gap-6 sm:gap-8 text-base sm:text-lg transition-all duration-300"
       >
-        <a
-          href="#home"
-          className="text-[color:rgba(var(--text))] text-sm font-medium hover:text-purple-600 transition-colors duration-200"
-        >
-          Home
-        </a>
-        <a
-          href="#work"
-          className="text-[color:rgba(var(--text))] text-sm font-medium hover:text-purple-600 transition-colors duration-200"
-        >
-          Work
-        </a>
-        <a
-          href="#projects"
-          className="text-[color:rgba(var(--text))] text-sm font-medium hover:text-purple-600 transition-colors duration-200"
-        >
-          Projects
-        </a>
-        <a
-          href="#games"
-          className="text-[color:rgba(var(--text))] text-sm font-medium hover:text-purple-600 transition-colors duration-200"
-        >
-          Games
-        </a>
+        {["home", "work", "games", "projects", "community", "contact"].map((section) => (
+          <a
+            key={section}
+            href={`#${section}`}
+            className="text-[color:rgba(var(--text))] text-sm font-medium hover:text-purple-600 transition-colors duration-200 capitalize"
+          >
+            {section}
+          </a>
+        ))}
 
         {/* Theme toggle inside panel */}
         <button

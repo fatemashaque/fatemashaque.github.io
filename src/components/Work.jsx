@@ -6,6 +6,11 @@ const Work = () => {
     >
       <div className="max-w-4xl mx-auto space-y-16">
 
+        {/* Section Header */}
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-10 text-[color:rgba(var(--accent))] drop-shadow-md">
+          Work Experience
+        </h2>
+
         {/* Game Developer */}
         <div className="p-8 sm:p-10 rounded-xl shadow-md bg-[rgba(var(--card),0.6)] backdrop-blur-sm text-[color:rgba(var(--text))] transition-colors duration-300">
           <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-[color:rgba(var(--accent))]">

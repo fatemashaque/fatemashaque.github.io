@@ -23,7 +23,11 @@ html {
   --text: 33, 33, 33; /* near-black */
   --muted-text: 100, 100, 100;
   --accent: 139, 92, 246;
+  --projects-bg: 225, 240, 255; /* #E1F0FF */
   --work-bg: 179, 212, 245;
+  --card-alt: 245, 245, 245;
+  --footer-bg: 179, 212, 245;
+  --footer-text: 33, 33, 33;
 
   background: rgba(var(--background));
 }
@@ -39,7 +43,29 @@ html {
   --text: 255, 255, 255;
   --muted-text: 179, 179, 179;
   --accent: 168, 129, 255;
-  --work-bg: 15, 15, 15;
+  --projects-bg: 15, 15, 15;
+  --work-bg: 12, 12, 25;
+  --card-alt: 30, 30, 30;
+  --footer-bg: 0, 0, 0;
+  --footer-text: 179, 179, 179;
 
   background: rgba(var(--background));
+}
+
+.feature-card {
+  @apply backdrop-blur-sm;
+  background-color: #bae6fd; 
+}
+
+.dark .feature-card {
+  background-color: rgba(var(--card), 0.85);
+}
+
+.game-panel {
+  background-color: #bae6fd;  
+  @apply backdrop-blur-sm;
+}
+
+.dark .game-panel {
+  background-color: rgba(var(--card-alt), 0.85);
 }
