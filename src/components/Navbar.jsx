@@ -25,28 +25,24 @@ const Navbar = () => {
     }
   }, [darkMode]);
 
-  // Main nav items
-  const navItems = [
+  const bottomNavItems = [
     { name: "Home", icon: <Home size={20} />, href: "#home" },
     { name: "Work", icon: <Briefcase size={20} />, href: "#work" },
-    { name: "Games", icon: <Gamepad2 size={20} />, href: "#games" },
     { name: "Projects", icon: <FolderOpen size={20} />, href: "#projects" },
-    { name: "Community", icon: <Users size={20} />, href: "#community" },
     { name: "Contact", icon: <Mail size={20} />, href: "#contact" },
+  ];
+
+  const extraNavItems = [
+    { name: "Games", icon: <Gamepad2 size={20} />, href: "#games" },
+    { name: "Community", icon: <Users size={20} />, href: "#community" },
   ];
 
   return (
     <>
       {/* ===== DESKTOP NAVBAR ===== */}
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 hidden md:flex items-center justify-between px-6 py-4
-          ${darkMode ? "bg-black bg-opacity-70" : "bg-blue-100 bg-opacity-70"} 
-          shadow-md backdrop-blur-md transition-colors duration-300`}
-      >
-        {/* Logo */}
+      <nav className="fixed top-0 left-0 right-0 z-40 hidden md:flex items-center justify-between px-6 py-4 bg-transparent backdrop-blur-md transition-colors duration-300">
         <img src="/logo.png" alt="Fatema Logo" className="h-10 w-auto object-contain" />
 
-        {/* Center Menu */}
         <div
           className="absolute left-1/2 transform -translate-x-1/2 px-6 py-3 
           bg-[rgba(var(--card),0.6)] backdrop-blur-md 
@@ -78,14 +74,13 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* ===== MOBILE NAVBAR ===== */}
+      {/* ===== MOBILE TOP NAVBAR ===== */}
       <div
-        className={`fixed top-0 left-0 right-0 z-50 bg-[rgba(var(--card),0.95)] 
+        className={`fixed top-0 left-0 right-0 z-50 
           ${darkMode ? "bg-black bg-opacity-70" : "bg-blue-100 bg-opacity-70"} 
           backdrop-blur-md border-b border-[rgba(var(--border),0.3)] 
           flex justify-between items-center px-4 py-3 shadow-md md:hidden`}
       >
-        {/* Logo */}
         <img src="/logo.png" alt="Fatema Logo" className="h-8 w-auto object-contain" />
 
         {/* Menu button */}
@@ -100,13 +95,13 @@ const Navbar = () => {
       {/* ===== MOBILE DROPDOWN MENU ===== */}
       {menuOpen && (
         <div
-          className={`fixed top-12 left-0 right-0 bg-[rgba(var(--card),0.95)] 
+          className={`fixed top-12 left-0 right-0 
           ${darkMode ? "bg-black bg-opacity-90" : "bg-blue-100 bg-opacity-95"}
           backdrop-blur-md border-b border-[rgba(var(--border),0.3)] 
           shadow-lg md:hidden animate-slide-down`}
         >
           <div className="flex flex-col items-center py-3 gap-3">
-            {navItems.map((item) => (
+            {bottomNavItems.concat(extraNavItems).map((item) => (
               <a
                 key={item.name}
                 href={item.href}
