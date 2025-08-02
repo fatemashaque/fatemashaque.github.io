@@ -14,7 +14,6 @@ const Navbar = () => {
   // Handle theme toggle
   useEffect(() => {
     const root = document.documentElement;
-
     if (darkMode) {
       root.classList.add("dark");
       root.classList.remove("light");
@@ -26,12 +25,12 @@ const Navbar = () => {
     }
   }, [darkMode]);
 
-  // Main sections
+  // Main nav items
   const navItems = [
     { name: "Home", icon: <Home size={20} />, href: "#home" },
     { name: "Work", icon: <Briefcase size={20} />, href: "#work" },
-    { name: "Projects", icon: <FolderOpen size={20} />, href: "#projects" },
     { name: "Games", icon: <Gamepad2 size={20} />, href: "#games" },
+    { name: "Projects", icon: <FolderOpen size={20} />, href: "#projects" },
     { name: "Community", icon: <Users size={20} />, href: "#community" },
     { name: "Contact", icon: <Mail size={20} />, href: "#contact" },
   ];
@@ -41,27 +40,33 @@ const Navbar = () => {
       {/* ===== DESKTOP NAVBAR ===== */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 hidden md:flex items-center justify-between px-6 py-4
-        ${darkMode ? "bg-black text-white" : "bg-blue-100 text-black"} 
-        shadow-md transition-colors duration-300`}
+          ${darkMode ? "bg-black bg-opacity-70" : "bg-blue-100 bg-opacity-70"} 
+          shadow-md backdrop-blur-md transition-colors duration-300`}
       >
+        {/* Logo */}
         <img src="/logo.png" alt="Fatema Logo" className="h-10 w-auto object-contain" />
 
-        <div className="flex items-center gap-6 sm:gap-8 text-base sm:text-lg">
-          {navItems.map((item) => (
+        {/* Center Menu */}
+        <div
+          className="absolute left-1/2 transform -translate-x-1/2 px-6 py-3 
+          bg-[rgba(var(--card),0.6)] backdrop-blur-md 
+          border border-[rgba(var(--border),0.3)] shadow-md 
+          rounded-full flex items-center gap-6 sm:gap-8 text-base sm:text-lg transition-all duration-300"
+        >
+          {["home", "work", "games", "projects", "community", "contact"].map((section) => (
             <a
-              key={item.name}
-              href={item.href}
-              className="capitalize text-sm font-medium hover:text-purple-600 transition-colors duration-200"
+              key={section}
+              href={`#${section}`}
+              className="text-[color:rgba(var(--text))] text-sm font-medium hover:text-purple-600 transition-colors duration-200 capitalize"
             >
-              {item.name}
+              {section}
             </a>
           ))}
 
           {/* Theme toggle */}
           <button
             onClick={() => setDarkMode((prev) => !prev)}
-            className={`rounded-full p-2 transition duration-300 
-              ${darkMode ? "bg-gray-700 hover:bg-gray-600" : "bg-yellow-400 hover:bg-yellow-300"}`}
+            className="rounded-full p-2 bg-yellow-400 hover:bg-yellow-300 shadow-inner transition duration-300"
             aria-label="Toggle Dark Mode"
           >
             {darkMode ? (
@@ -73,19 +78,20 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* ===== MOBILE NAVBAR (TOP ALIGNED) ===== */}
+      {/* ===== MOBILE NAVBAR ===== */}
       <div
-        className={`fixed top-0 left-0 right-0 z-50 bg-opacity-95 
-        ${darkMode ? "bg-black text-white" : "bg-blue-100 text-black"} 
-        backdrop-blur-md border-b border-[rgba(0,0,0,0.1)] 
-        flex justify-between items-center px-4 py-3 shadow-md md:hidden`}
+        className={`fixed top-0 left-0 right-0 z-50 bg-[rgba(var(--card),0.95)] 
+          ${darkMode ? "bg-black bg-opacity-70" : "bg-blue-100 bg-opacity-70"} 
+          backdrop-blur-md border-b border-[rgba(var(--border),0.3)] 
+          flex justify-between items-center px-4 py-3 shadow-md md:hidden`}
       >
-        <img src="/logo.png" alt="Fatema Logo" className="h-8 object-contain" />
+        {/* Logo */}
+        <img src="/logo.png" alt="Fatema Logo" className="h-8 w-auto object-contain" />
 
         {/* Menu button */}
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
-          className="flex items-center gap-1 text-sm font-medium hover:text-purple-600 transition"
+          className="text-[color:rgba(var(--text))] hover:text-purple-600 transition"
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -94,16 +100,17 @@ const Navbar = () => {
       {/* ===== MOBILE DROPDOWN MENU ===== */}
       {menuOpen && (
         <div
-          className={`fixed top-14 left-0 right-0 z-40 
-          ${darkMode ? "bg-black text-white" : "bg-blue-100 text-black"} 
-          shadow-md md:hidden animate-slide-down`}
+          className={`fixed top-12 left-0 right-0 bg-[rgba(var(--card),0.95)] 
+          ${darkMode ? "bg-black bg-opacity-90" : "bg-blue-100 bg-opacity-95"}
+          backdrop-blur-md border-b border-[rgba(var(--border),0.3)] 
+          shadow-lg md:hidden animate-slide-down`}
         >
-          <div className="flex flex-col items-center py-4 gap-4">
+          <div className="flex flex-col items-center py-3 gap-3">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="flex items-center gap-2 text-sm font-medium hover:text-purple-600 transition"
+                className="flex items-center gap-2 text-sm font-medium text-[color:rgba(var(--text))] hover:text-purple-600 transition"
                 onClick={() => setMenuOpen(false)}
               >
                 {item.icon}
@@ -111,14 +118,13 @@ const Navbar = () => {
               </a>
             ))}
 
-            {/* Theme toggle button */}
+            {/* Theme Toggle */}
             <button
               onClick={() => setDarkMode((prev) => !prev)}
-              className={`rounded-full px-4 py-2 mt-2 transition duration-300 
-                ${darkMode ? "bg-gray-700 hover:bg-gray-600" : "bg-yellow-400 hover:bg-yellow-300"}`}
-              aria-label="Toggle Dark Mode"
+              className="flex items-center gap-2 mt-2 px-3 py-1 rounded-full bg-yellow-400 hover:bg-yellow-300 shadow-inner transition duration-300"
             >
-              {darkMode ? "Dark Mode" : "Light Mode"}
+              {darkMode ? <Moon size={18} /> : <Sun size={18} />}
+              <span className="text-sm font-medium">Toggle Theme</span>
             </button>
           </div>
         </div>
