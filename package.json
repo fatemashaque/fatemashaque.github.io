@@ -8,9 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npm run build && git add . && git commit -m 'Deploy latest build' && git push"
+    "deploy": "npm run build && powershell -Command \"Copy-Item -Path docs\\* -Destination . -Recurse -Force\" && git add . && git commit -m \\\"Deploy update\\\" && git push origin main"  
   },
-  "dependencies": {
+    "dependencies": {
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
