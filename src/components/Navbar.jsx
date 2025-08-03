@@ -9,14 +9,11 @@ const Navbar = () => {
     return false;
   });
 
-  const [showMobileNav, setShowMobileNav] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Handle theme toggle
   useEffect(() => {
     const root = document.documentElement;
-
     if (darkMode) {
       root.classList.add("dark");
       root.classList.remove("light");
@@ -28,22 +25,6 @@ const Navbar = () => {
     }
   }, [darkMode]);
 
-  // Handle scroll direction (show/hide bottom navbar on mobile)
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > lastScrollY) {
-        setShowMobileNav(false);
-      } else {
-        setShowMobileNav(true);
-      }
-      setLastScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
-
-  // Main sections for bottom nav
   const bottomNavItems = [
     { name: "Home", icon: <Home size={20} />, href: "#home" },
     { name: "Work", icon: <Briefcase size={20} />, href: "#work" },
@@ -51,7 +32,6 @@ const Navbar = () => {
     { name: "Contact", icon: <Mail size={20} />, href: "#contact" },
   ];
 
-  // Extra sections for hamburger menu
   const extraNavItems = [
     { name: "Games", icon: <Gamepad2 size={20} />, href: "#games" },
     { name: "Community", icon: <Users size={20} />, href: "#community" },
@@ -60,7 +40,7 @@ const Navbar = () => {
   return (
     <>
       {/* ===== DESKTOP NAVBAR ===== */}
-      <nav className="fixed top-0 left-0 right-0 z-50 hidden md:flex items-center justify-between px-6 py-4 bg-transparent backdrop-blur-md transition-colors duration-300">
+      <nav className="fixed top-0 left-0 right-0 z-40 hidden md:flex items-center justify-between px-6 py-4 bg-transparent backdrop-blur-md transition-colors duration-300">
         <img src="/logo.png" alt="Fatema Logo" className="h-10 w-auto object-contain" />
 
         <div
@@ -94,40 +74,34 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* ===== MOBILE BOTTOM NAVBAR ===== */}
+      {/* ===== MOBILE TOP NAVBAR ===== */}
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-[rgba(var(--card),0.95)] 
-          backdrop-blur-md border-t border-[rgba(var(--border),0.3)] 
-          flex justify-around items-center py-2 transition-transform duration-300 
-          shadow-lg md:hidden
-          ${showMobileNav ? "translate-y-0" : "translate-y-full"}`}
+        className={`fixed top-0 left-0 right-0 z-50 
+          ${darkMode ? "bg-black bg-opacity-70" : "bg-blue-100 bg-opacity-70"} 
+          backdrop-blur-md border-b border-[rgba(var(--border),0.3)] 
+          flex justify-between items-center px-4 py-3 shadow-md md:hidden`}
       >
-        {bottomNavItems.map((item) => (
-          <a
-            key={item.name}
-            href={item.href}
-            className="flex flex-col items-center text-xs font-medium text-[color:rgba(var(--text))] hover:text-purple-600 transition"
-          >
-            {item.icon}
-            <span>{item.name}</span>
-          </a>
-        ))}
+        <img src="/logo.png" alt="Fatema Logo" className="h-8 w-auto object-contain" />
 
-        {/* Hamburger for extra items */}
+        {/* Menu button */}
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
-          className="flex flex-col items-center text-xs font-medium text-[color:rgba(var(--text))] hover:text-purple-600 transition"
+          className="text-[color:rgba(var(--text))] hover:text-purple-600 transition"
         >
-          {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          <span>More</span>
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* ===== MOBILE HAMBURGER MENU ===== */}
+      {/* ===== MOBILE DROPDOWN MENU ===== */}
       {menuOpen && (
-        <div className="fixed bottom-16 left-0 right-0 bg-[rgba(var(--card),0.95)] backdrop-blur-md border-t border-[rgba(var(--border),0.3)] shadow-lg md:hidden animate-slide-up">
+        <div
+          className={`fixed top-12 left-0 right-0 
+          ${darkMode ? "bg-black bg-opacity-90" : "bg-blue-100 bg-opacity-95"}
+          backdrop-blur-md border-b border-[rgba(var(--border),0.3)] 
+          shadow-lg md:hidden animate-slide-down`}
+        >
           <div className="flex flex-col items-center py-3 gap-3">
-            {extraNavItems.map((item) => (
+            {bottomNavItems.concat(extraNavItems).map((item) => (
               <a
                 key={item.name}
                 href={item.href}
@@ -138,6 +112,15 @@ const Navbar = () => {
                 {item.name}
               </a>
             ))}
+
+            {/* Theme Toggle */}
+            <button
+              onClick={() => setDarkMode((prev) => !prev)}
+              className="flex items-center gap-2 mt-2 px-3 py-1 rounded-full bg-yellow-400 hover:bg-yellow-300 shadow-inner transition duration-300"
+            >
+              {darkMode ? <Moon size={18} /> : <Sun size={18} />}
+              <span className="text-sm font-medium">Toggle Theme</span>
+            </button>
           </div>
         </div>
       )}
