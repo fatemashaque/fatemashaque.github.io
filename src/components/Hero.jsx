@@ -21,7 +21,7 @@ const Hero = () => {
           </h1>
 
           <p className="mt-6 text-lg sm:text-xl font-medium text-[color:rgba(var(--muted-text))]">
-            Innovative and results-driven software developer with 4+ years of experience in game development, full-stack web applications, and performance optimization. Proven ability to deliver immersive, scalable software used by millions. Passionate about building user-centric, high-performance solutions through cross-functional collaboration, data-driven iteration, and technical excellence.
+            Software Developer with 5+ years of experience developing interactive educational games, performance-sensitive simulation software and distributed systems using C++, C#, and Unity. Skilled in software architecture, networking, runtime optimization, debugging and translating complex technical requirements into reliable user-facing software. Proven ability to deliver immersive, scalable software used by millions. Passionate about building user-centric, high-performance solutions through cross-functional collaboration, data-driven iteration, and technical excellence.
           </p>
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-8">
