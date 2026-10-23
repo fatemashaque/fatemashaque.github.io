@@ -1,11 +1,15 @@
 import { useState } from "react";
 
+// Get a free key at https://web3forms.com (messages are sent to the email you register there)
+const WEB3FORMS_ACCESS_KEY = "13b87134-06cb-4ea7-bcb6-45906be131ee";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: ""
   });
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -14,11 +18,29 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can add email integration here or use Netlify/Formspree/etc.
-    alert("Thanks for your message!");
-    setFormData({ name: "", email: "", message: "" });
+    setStatus("sending");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `Portfolio message from ${formData.name}`,
+          from_name: "Portfolio Contact Form",
+          ...formData
+        })
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message);
+
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -64,10 +86,17 @@ const Contact = () => {
           ></textarea>
           <button
             type="submit"
-            className="px-6 py-3 rounded-full bg-[rgba(var(--cta),1)] text-[rgba(var(--cta-text))] font-semibold hover:bg-[rgba(var(--cta-active),1)] transition-colors"
+            disabled={status === "sending"}
+            className="px-6 py-3 rounded-full bg-[rgba(var(--cta),1)] text-[rgba(var(--cta-text))] font-semibold hover:bg-[rgba(var(--cta-active),1)] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Send Message
+            {status === "sending" ? "Sending..." : "Send Message"}
           </button>
+          {status === "success" && (
+            <p className="text-[color:rgba(var(--accent))]">Thanks for your message! I'll get back to you soon.</p>
+          )}
+          {status === "error" && (
+            <p className="text-red-500">Something went wrong. Please try again later.</p>
+          )}
         </form>
       </div>
     </section>
