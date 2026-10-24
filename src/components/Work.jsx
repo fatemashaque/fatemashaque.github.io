@@ -22,7 +22,7 @@ const Work = () => {
           <ul className="list-disc list-inside space-y-1 text-[color:rgba(var(--muted-text))]">
             <li>Developed software using C++, C#, and Unity for marine training simulation systems, with a focus on large-vessel bridge simulation, embedded navigation, sensor models, and radar systems.</li>
             <li>Led development of a proprietary radar DLL, integrating hardware interfaces, distributed communication, radar and sensor protocol handling, TCP control connections, and UDP ASTERIX CAT-240 raw video output.</li>
-            <li>Contributed to the mathematical and physics-based modelling of 5 marine vessels, improving hydrodynamic model accuracy by approximately 20%.</li>
+            <li>Contributed to the mathematical and physics-based modelling of 3 marine vessels, improving hydrodynamic model accuracy.</li>
             <li>Applied numerical methods to solve real-time physics simulation problems related to vessel behaviour and model validation.</li>
             <li>Implemented protocol support for marine sensor models, including NMEA 0183 messaging for AIS simulation.</li>
             <li>Developed automation scripts to streamline software installation and networking setup, reducing commercial delivery time by approximately 30%.</li>
